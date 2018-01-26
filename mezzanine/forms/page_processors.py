@@ -41,7 +41,7 @@ def form_processor(request, page):
         entry = form.save()
         subject = page.form.email_subject
         if not subject:
-            subject = "%s - %s" % (page.form.title, entry.entry_time.strftime('%x %X'))
+            subject = "%s - %s" % (page.form.title, entry.entry_time.strftime('%Y-%m-%d %H:%M'))
         fields = [(form.form_fields.get(id=int(k.split('_')[1])), format_value(form.cleaned_data[k]))
                   for k in form.fields]
         context = {
