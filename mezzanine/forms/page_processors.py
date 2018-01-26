@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import redirect
 from django.template import RequestContext
+from django.template.context_processors import i18n
 
 from mezzanine.conf import settings
 from mezzanine.forms.forms import FormForForm
@@ -49,6 +50,7 @@ def form_processor(request, page):
             "request": request,
             "site_url": settings.SITE_URL,
         }
+        context.update(i18n(request))
         email_from = page.form.email_from or settings.DEFAULT_FROM_EMAIL
         email_to = form.email_to()
         if email_to and page.form.send_email:
