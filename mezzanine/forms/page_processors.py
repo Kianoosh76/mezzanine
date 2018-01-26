@@ -43,11 +43,12 @@ def form_processor(request, page):
             subject = "%s - %s" % (page.form.title, entry.entry_time)
         fields = [(v.label, format_value(form.cleaned_data[k]))
                   for (k, v) in form.fields.items()]
-        context = {
+        context = RequestContext(request)
+        context.update({
             "fields": fields,
             "message": page.form.email_message,
             "request": request,
-        }
+        })
         email_from = page.form.email_from or settings.DEFAULT_FROM_EMAIL
         email_to = form.email_to()
         if email_to and page.form.send_email:
