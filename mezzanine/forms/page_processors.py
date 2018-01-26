@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.shortcuts import redirect
 from django.template import RequestContext
-from django.template.context import make_context
 
 from mezzanine.conf import settings
 from mezzanine.forms.forms import FormForForm
@@ -44,11 +43,12 @@ def form_processor(request, page):
             subject = "%s - %s" % (page.form.title, entry.entry_time)
         fields = [(v.label, format_value(form.cleaned_data[k]))
                   for (k, v) in form.fields.items()]
-        context = make_context({
+        context = {
             "fields": fields,
             "message": page.form.email_message,
             "request": request,
-        }, request=request)
+            "site_url": settings.SITE_URL,
+        }
         email_from = page.form.email_from or settings.DEFAULT_FROM_EMAIL
         email_to = form.email_to()
         if email_to and page.form.send_email:
