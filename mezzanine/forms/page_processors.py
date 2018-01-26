@@ -42,7 +42,7 @@ def form_processor(request, page):
         subject = page.form.email_subject
         if not subject:
             subject = "%s - %s" % (page.form.title, entry.entry_time)
-        fields = [(v.label, format_value(form.cleaned_data[k]))
+        fields = [(v, format_value(form.cleaned_data[k]))
                   for (k, v) in form.fields.items()]
         context = {
             "fields": fields,
