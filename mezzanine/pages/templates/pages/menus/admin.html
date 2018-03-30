@@ -1,7 +1,7 @@
 {% load pages_tags i18n staticfiles %}
 
 <ol>
-	{% for page in page_branch reversed %} {# reversed the list so the most recent child comes first! #}
+    {% for page in page_branch %}
     <li id="ordering_{{ page.id }}">
         <div class="{% cycle 'row1' 'row2' %}">
             <a href="#" class="tree-toggle" id="page-{{ page.id }}"
