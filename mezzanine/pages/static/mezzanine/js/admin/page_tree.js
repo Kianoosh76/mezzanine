@@ -78,7 +78,7 @@ jQuery(function($) {
             parent_id: parent.length ? parent[0].id : "null",
             siblings: ui.item.parent().children().map(function(index, elem) {
                 return elem.id;
-            }).get()
+            }).get().reverse()
         };
 
         $.post(window.__page_ordering_url, args, function(data) {
