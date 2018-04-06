@@ -566,6 +566,9 @@ class ContentTyped(models.Model):
         """
         Return content model, or if this is the base class return it.
         """
+        if self.content_model == 'paymentform':
+            return (getattr(self.form, self.content_model) if self.content_model else self)
+
         return (getattr(self, self.content_model) if self.content_model
                 else self)
 
