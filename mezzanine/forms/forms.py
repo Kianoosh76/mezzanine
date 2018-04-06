@@ -130,7 +130,7 @@ class FormForForm(forms.ModelForm):
         instance and its related field model instances.
         """
         self.form = form
-        self.form_fields = form.fields.visible()
+        self.form_fields = form.fields.all()
         initial = kwargs.pop("initial", {})
         # If a FormEntry instance is given to edit, populate initial
         # with its field values.
