@@ -66,6 +66,8 @@ def form_processor(request, page):
                                email_from, email_copies, context,
                                attachments=attachments, headers=headers)
         form_valid.send(sender=request, form=form, entry=entry)
-        return redirect(url)
-    form_invalid.send(sender=request, form=form)
+        page.form.is_valid = True
+    else:
+        page.form.is_valid = False
+        form_invalid.send(sender=request, form=form)
     return {"form": form}
