@@ -24,7 +24,7 @@ def format_value(value):
 
 
 @processor_for(Form)
-def form_processor(request, page):
+def form_processor(request, page, response_redirect=True):
     """
     Display a built form and handle submission.
     """
@@ -66,6 +66,8 @@ def form_processor(request, page):
                                email_from, email_copies, context,
                                attachments=attachments, headers=headers)
         form_valid.send(sender=request, form=form, entry=entry)
+        if response_redirect:
+            return redirect(url)
         page.form.is_valid = True
     else:
         page.form.is_valid = False
